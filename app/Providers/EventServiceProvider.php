@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Laravel\Passport\Events\{AccessTokenCreated, RefreshTokenCreated};
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        AccessTokenCreated::class => [
+            'App\Listeners\OAuth\RevokeOldTokens',
+        ],
+        RefreshTokenCreated::class => [
+            'App\Listeners\OAuth\PruneOldTokens',
         ],
     ];
 
