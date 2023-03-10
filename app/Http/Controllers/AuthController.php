@@ -19,13 +19,17 @@ class AuthController extends Controller
     public function callback()
     {
         $config = config('services.codelocks');
-        $user   = Socialite::buildProvider(CodelocksProvider::class, $config)->user();
-
-        Auth::login(new User([
-            'id'    => $user->id,
-            'name'  => $user->name,
-            'email' => $user->email
-        ]));
+        $tokenUser   = Socialite::buildProvider(CodelocksProvider::class, $config)->user();
+        $user = User::where('email', $tokenUser->email)->first();
+        if(!$user) {
+            $user = new User([
+                //'id'    => $user->id,
+                'name'  => $tokenUser->name,
+                'email' => $tokenUser->email
+            ]);
+            $user->save();
+        }
+        Auth::login($user);
         return redirect('/home');
     }
 }
