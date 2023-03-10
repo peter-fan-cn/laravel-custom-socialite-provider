@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'codelocks' => [
+        'client_id' => env('CODELOCKS_CLIENT_ID'),
+        'client_secret' => env('CODELOCKS_CLIENT_SECRET'),
+        'redirect' => env('APP_URL'). '/auth/callback',
+    ]
+
 ];
