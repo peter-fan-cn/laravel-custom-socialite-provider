@@ -1,5 +1,5 @@
 {
-    "name": "cw/user-oauth-service",
+    "name": "cw/user-tasks",
     "type": "project",
     "description": "user oauth service instance.",
     "keywords": ["framework", "laravel", "oauth","open-id"],
