@@ -27,7 +27,7 @@ class CodelocksProvider extends AbstractProvider implements ProviderInterface
 
     protected function getUserByToken($token)
     {
-        Log::debug('token:'. $token);
+        Log::debug('token:' . $token);
         $userUrl = $this->host . '/api/user';
 
         $response = $this->getHttpClient()->get(
@@ -52,8 +52,8 @@ class CodelocksProvider extends AbstractProvider implements ProviderInterface
     {
         return [
             RequestOptions::HEADERS => [
-                'Accept' => 'application/json',
-                'Authorization' => 'Bearer '.$token,
+                'Accept'        => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
             ],
         ];
     }
